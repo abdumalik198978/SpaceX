@@ -1,9 +1,12 @@
 package smokeTest;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
+import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import pages.brideERP_pages.ERP_login;
+import pages.brideERP_pages.PurchasePage;
 import utilities.Config;
 import utilities.Driver;
 import utilities.SeleniumUtil;
@@ -20,7 +23,9 @@ public class SmokeTest {
     }
 
     @Test
-    public void purchaseVerificatio(){
-
+    public void purchaseHomePageVerification(){
+        PurchasePage pg = new PurchasePage();
+        pg.purchaseButton.click();
+        Assert.assertTrue(pg.purchaseButton.isDisplayed(), "Purchase module not displayed");
     }
 }
