@@ -38,6 +38,11 @@ public class SmokeTest {
 
     @Test
     public void verifySearchFunctionalityOfProducts(){
-
+        productsPage.purchasesButton.click();
+        productsPage.productsButton.click();
+        SeleniumUtil.pause(5);
+        productsPage.productsSearchBox.sendKeys(Config.getProperties("productSearchLowerCase"));
+        productsPage.searchProductFor.click();
+        
     }
 }

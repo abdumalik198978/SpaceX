@@ -13,7 +13,10 @@ public class ProductsPage {
     public WebElement purchasesButton;
     @FindBy (xpath = "//a[@data-action-id='691']")
     public WebElement productsButton;
-
+    @FindBy (xpath = "//input[@class = 'o_searchview_input']")
+    public WebElement productsSearchBox;
+    @FindBy (xpath = "//a[@href='#']/em[.='Product']")
+    public WebElement searchProductFor;
 
 
 }
