@@ -22,10 +22,11 @@ public class SmokeTest {
 
     }
 
-    @Test
+    @Test(priority = 1)
     public void purchaseHomePageVerification(){
         PurchasePage pg = new PurchasePage();
         pg.purchaseButton.click();
         Assert.assertTrue(pg.purchaseButton.isDisplayed(), "Purchase module not displayed");
     }
+
 }
