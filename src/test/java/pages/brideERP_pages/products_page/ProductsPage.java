@@ -14,8 +14,6 @@ public class ProductsPage {
     @FindBy (xpath = "//a[@data-action-id='691']")
     public WebElement productsButton;
 
-    @FindBy (xpath = "//button[@aria-label='kanban']")
-    public WebElement kanbanButton;
 
 
 }
