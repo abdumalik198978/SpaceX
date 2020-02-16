@@ -25,11 +25,17 @@ public class ProductsPage {
     public WebElement randomProduct;
     @FindBy (xpath = "//span[@name='name']")
     public WebElement getRandomProductTitle;
-    @FindBy (xpath = "//a[@aria-expanded='true']")
-    public WebElement defaultTabOnProductsDetails;
-    @FindBy (xpath = "//a[@data-toggle='tab']")
-    public WebElement allProductDetailsTabs;
-
-
+    @FindBy (linkText = "General Information")
+    public WebElement genInfoTab;
+    @FindBy(linkText = "Sales")
+    public WebElement salesTab;
+    @FindBy(linkText = "Purchase")
+    public WebElement purchaseTab;
+    @FindBy(linkText = "Inventory")
+    public WebElement inventoryTab;
+    @FindBy(linkText = "Invoicing")
+    public WebElement invoicingTab;
+    @FindBy(linkText = "Notes")
+    public WebElement notesTab;
 
 }

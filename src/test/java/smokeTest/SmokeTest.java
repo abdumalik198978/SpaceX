@@ -13,7 +13,6 @@ import utilities.Driver;
 import utilities.SeleniumUtil;
 
 import java.util.List;
-import java.util.NoSuchElementException;
 import java.util.Random;
 
 public class SmokeTest {
@@ -28,7 +27,7 @@ public class SmokeTest {
 
     }
 
-    @Test
+    @Test (priority = 40)
     public void verifyClickOnProducts (){
      productsPage.purchasesButton.click();
      productsPage.productsButton.click();
@@ -38,7 +37,7 @@ public class SmokeTest {
      Assert.assertEquals(actualTitleProductPage,expectedTitleProductPage,"Titles of the PRODUCTS page do NOT match");
     }
 
-    @Test
+    @Test (priority = 41)
     public void verifySearchFunctionalityOfProducts(){
         productsPage.purchasesButton.click();
         productsPage.productsButton.click();
@@ -55,43 +54,38 @@ public class SmokeTest {
         productsPage.productsSearchBox.sendKeys(Keys.ENTER);
         try {
             Assert.assertTrue(productsPage.wrongSearchMessage.isDisplayed());
-        }catch (NoSuchElementException e){
+        }catch (Exception e){
             System.out.println("The message of the search box is NOT displayed!");
         }
        productsPage.productCrossButton.click();
     }
 
-    @Test
+    @Test (priority = 42)
     public void verifyProductsDetailsAvailable(){
         productsPage.purchasesButton.click();
         productsPage.productsButton.click();
         SeleniumUtil.pause(5);
+
         //selecting random product from the list
         Random random = new Random();
         List<WebElement> productAll = Driver.getDriver().findElements(By.xpath("//div[@class = 'oe_kanban_global_click o_kanban_record']"));
         int productOne = random.nextInt(productAll.size());
         productAll.get(productOne).click();
 
-        //on Product's details page
+        //on Product's details page, verify title
         SeleniumUtil.pause(5);
         String actualTitle = Driver.getDriver().getTitle();
         String expectedTitle = productsPage.getRandomProductTitle.getText()+" - Odoo";
         Assert.assertTrue(actualTitle.contains(expectedTitle),"Product's details' page title does NOT match");
 
-        //checking each tab ---not finished
+        //checking each tab
         SeleniumUtil.pause(2);
-        List<WebElement> tabs = Driver.getDriver().findElements(By.xpath("//a[@data-toggle='tab']"));
+        List <WebElement> tabs = Driver.getDriver().findElements(By.xpath("//a[@data-toggle='tab']"));
         for(WebElement tab : tabs){
-            if(!tab.getText().equals("Variants") && !tab.getText().equals("Images")){
+            if(!tab.getText().isEmpty()){
                 tab.click();
                 SeleniumUtil.pause(2);
             }
         }
-
-
-
-
-
-
     }
 }
