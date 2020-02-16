@@ -33,7 +33,7 @@ public class SmokeTest {
 
     }
 
-  //  @Test
+    @Test
     public void verifyClickOnProducts (){
      productsPage.purchasesButton.click();
      productsPage.productsButton.click();
@@ -43,7 +43,7 @@ public class SmokeTest {
      Assert.assertEquals(actualTitleProductPage,expectedTitleProductPage,"Titles of the PRODUCTS page do NOT match");
     }
 
-  //  @Test
+    @Test
     public void verifySearchFunctionalityOfProducts(){
         productsPage.purchasesButton.click();
         productsPage.productsButton.click();
