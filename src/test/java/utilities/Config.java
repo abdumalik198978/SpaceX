@@ -1,4 +1,5 @@
-package src.test.java.utilities;
+package utilities;
+
 
 import java.io.FileInputStream;
 import java.io.IOException;

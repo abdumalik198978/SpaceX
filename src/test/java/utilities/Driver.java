@@ -6,7 +6,6 @@ import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.safari.SafariDriver;
-import src.test.java.utilities.Config;
 
 import java.util.concurrent.TimeUnit;
 
