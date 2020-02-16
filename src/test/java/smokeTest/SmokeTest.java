@@ -6,6 +6,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
@@ -18,6 +19,7 @@ import utilities.SeleniumUtil;
 
 import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.Random;
 
 public class SmokeTest {
     ProductsPage productsPage = new ProductsPage();
@@ -31,7 +33,7 @@ public class SmokeTest {
 
     }
 
-    @Test
+  //  @Test
     public void verifyClickOnProducts (){
      productsPage.purchasesButton.click();
      productsPage.productsButton.click();
@@ -41,7 +43,7 @@ public class SmokeTest {
      Assert.assertEquals(actualTitleProductPage,expectedTitleProductPage,"Titles of the PRODUCTS page do NOT match");
     }
 
-    @Test
+  //  @Test
     public void verifySearchFunctionalityOfProducts(){
         productsPage.purchasesButton.click();
         productsPage.productsButton.click();
@@ -62,6 +64,18 @@ public class SmokeTest {
             System.out.println("The message of the search box is NOT displayed!");
         }
        productsPage.productCrossButton.click();
+    }
+
+    @Test
+    public void verifyProductsDetailsAvailable(){
+        productsPage.purchasesButton.click();
+        productsPage.productsButton.click();
+        Random random = new Random();
+        List<WebElement> productAll = Driver.getDriver().findElements(By.xpath("//div[@class = 'oe_kanban_global_click o_kanban_record']"));
+        int productOne = random.nextInt(productAll.size());
+        productAll.get(productOne).click();
+
+
 
     }
 }
