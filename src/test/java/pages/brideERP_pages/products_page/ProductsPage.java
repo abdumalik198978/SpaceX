@@ -17,6 +17,10 @@ public class ProductsPage {
     public WebElement productsSearchBox;
     @FindBy (xpath = "//a[@href='#']/em[.='Product']")
     public WebElement searchProductFor;
+    @FindBy (xpath = "//span[@class = 'o_searchview_facet_label']/following-sibling::div/following-sibling::div")
+    public WebElement productCrossButton;
+    @FindBy (css = "div.oe_view_nocontent")
+    public WebElement wrongSearchMessage;
 
 
 }
