@@ -5,10 +5,15 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import utilities.Driver;
 
-public class PurchasePage {
-    public PurchasePage() {
+import java.util.List;
+
+public class PurchaseOrdersPage {
+    public PurchaseOrdersPage() {
         PageFactory.initElements(Driver.getDriver(), this);
     }
-    @FindBy(xpath="//*[contains(text(),'Purchases')]")
-    public WebElement purchaseButton;
+
+    @FindBy(xpath = "//span[contains(text(),'Purchase Orders')]")
+    public WebElement purchaseOrdersButton;
+
+
 }
