@@ -17,19 +17,16 @@ public class Driver {
 
     public static WebDriver getDriver() {
         if (driver == null){
-            switch (Config.getProperties("browser")){
-                case "chrome":
-                    WebDriverManager.chromedriver().setup();
-                    driver = new ChromeDriver();
-                    break;
-                case "firefox":
-                    WebDriverManager.firefoxdriver().setup();
-                    driver = new FirefoxDriver();
-                    break;
-                case "safari":
-                    WebDriverManager.getInstance(SafariDriver.class).setup();
-                    driver = new SafariDriver();
-                    break;
+            CharSequence browser = Config.getProperties("browser");
+            if ("chrome".equals(browser)) {
+                WebDriverManager.chromedriver().setup();
+                driver = new ChromeDriver();
+            } else if ("firefox".equals(browser)) {
+                WebDriverManager.firefoxdriver().setup();
+                driver = new FirefoxDriver();
+            } else if ("safari".equals(browser)) {
+                WebDriverManager.getInstance(SafariDriver.class).setup();
+                driver = new SafariDriver();
             }
             driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
             driver.manage().window().maximize();
