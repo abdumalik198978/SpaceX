@@ -23,12 +23,13 @@ public class ProductsPage {
     public WebElement wrongSearchMessage;
     @FindBy (xpath = "//div[@class = 'oe_kanban_global_click o_kanban_record']")
     public WebElement randomProduct;
-    @FindBy (xpath = "//div[@name='can_be_expensed']/input")
-    public WebElement canBeExpensed;
-    @FindBy(xpath = "//div[@name='purchase_ok']/input")
-    public WebElement canBePurchased;
-    @FindBy(xpath = "//div[@name='sale_ok']/input")
-    public WebElement canBeSold;
+    @FindBy (xpath = "//span[@name='name']")
+    public WebElement getRandomProductTitle;
+    @FindBy (xpath = "//a[@aria-expanded='true']")
+    public WebElement defaultTabOnProductsDetails;
+    @FindBy (xpath = "//a[@data-toggle='tab']")
+    public WebElement allProductDetailsTabs;
+
 
 
 }

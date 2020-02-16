@@ -3,11 +3,6 @@ package smokeTest;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.Select;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
@@ -70,10 +65,31 @@ public class SmokeTest {
     public void verifyProductsDetailsAvailable(){
         productsPage.purchasesButton.click();
         productsPage.productsButton.click();
+        SeleniumUtil.pause(5);
+        //selecting random product from the list
         Random random = new Random();
         List<WebElement> productAll = Driver.getDriver().findElements(By.xpath("//div[@class = 'oe_kanban_global_click o_kanban_record']"));
         int productOne = random.nextInt(productAll.size());
         productAll.get(productOne).click();
+
+        //on Product's details page
+        SeleniumUtil.pause(5);
+        String actualTitle = Driver.getDriver().getTitle();
+        String expectedTitle = productsPage.getRandomProductTitle.getText()+" - Odoo";
+        Assert.assertTrue(actualTitle.contains(expectedTitle),"Product's details' page title does NOT match");
+
+        //checking each tab ---not finished
+        SeleniumUtil.pause(2);
+        List<WebElement> tabs = Driver.getDriver().findElements(By.xpath("//a[@data-toggle='tab']"));
+        for(WebElement tab : tabs){
+            if(!tab.getText().equals("Variants") && !tab.getText().equals("Images")){
+                tab.click();
+                SeleniumUtil.pause(2);
+            }
+        }
+
+
+
 
 
 
