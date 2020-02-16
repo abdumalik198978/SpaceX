@@ -28,7 +28,7 @@ public class SmokeTest {
         login.loginButton.click();
     }
 
-    @Test(priority = 1)
+    @Test(priority = 10)
     public void purchaseHomePageVerification() {
 
         PurchaseOrdersVerificationPage pg = new PurchaseOrdersVerificationPage();
@@ -36,7 +36,7 @@ public class SmokeTest {
         Assert.assertTrue(pg.purchaseButton.isDisplayed(), "Purchase module not displayed");
     }
 
-    @Test(priority = 2)
+    @Test(priority = 11)
     public void purchaseOrdersButtonVerification() {
         PurchaseOrdersPage pf = new PurchaseOrdersPage();
         SeleniumUtil.pause(3);
@@ -44,7 +44,7 @@ public class SmokeTest {
         pf.purchaseOrdersButton.click();
     }
 
-    @Test(priority = 3)
+    @Test(priority = 12)
     public void importButtonUnderPurchaseOrders() {
         PurchaseOrdersImportButtonPage io = new PurchaseOrdersImportButtonPage();
         SeleniumUtil.pause(3);
@@ -55,7 +55,7 @@ public class SmokeTest {
         io.cancelButton.click();
     }
 
-    @Test(priority = 4)
+    @Test(priority = 13)
     public void searchTabUnderPurchaseOrders() {
         PurchaseOrdersSearchTabPage pf = new PurchaseOrdersSearchTabPage();
         List<WebElement> list = pf.referenceList;
@@ -69,7 +69,7 @@ public class SmokeTest {
         pf.searchQuickResultCancelButton.click();
     }
 
-    @Test(priority = 5)
+    @Test(priority = 14)
     public void createButtonUnderPurchaseOrders() {
         PurchaseOrdersCreateButtonPage pb = new PurchaseOrdersCreateButtonPage();
         pb.createButton.click();
