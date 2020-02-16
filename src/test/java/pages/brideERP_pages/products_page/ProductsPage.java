@@ -21,21 +21,7 @@ public class ProductsPage {
     public WebElement productCrossButton;
     @FindBy (css = "div.oe_view_nocontent")
     public WebElement wrongSearchMessage;
-    @FindBy (xpath = "//div[@class = 'oe_kanban_global_click o_kanban_record']")
-    public WebElement randomProduct;
     @FindBy (xpath = "//span[@name='name']")
     public WebElement getRandomProductTitle;
-    @FindBy (linkText = "General Information")
-    public WebElement genInfoTab;
-    @FindBy(linkText = "Sales")
-    public WebElement salesTab;
-    @FindBy(linkText = "Purchase")
-    public WebElement purchaseTab;
-    @FindBy(linkText = "Inventory")
-    public WebElement inventoryTab;
-    @FindBy(linkText = "Invoicing")
-    public WebElement invoicingTab;
-    @FindBy(linkText = "Notes")
-    public WebElement notesTab;
 
 }
