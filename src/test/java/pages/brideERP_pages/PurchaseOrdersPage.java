@@ -5,17 +5,15 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import utilities.Driver;
 
-public class ERP_login {
-    public ERP_login() {
+import java.util.List;
+
+public class PurchaseOrdersPage {
+    public PurchaseOrdersPage() {
         PageFactory.initElements(Driver.getDriver(), this);
     }
 
-    @FindBy(id="login")
-    public WebElement usernameInput;
+    @FindBy(xpath = "//span[contains(text(),'Purchase Orders')]")
+    public WebElement purchaseOrdersButton;
 
-    @FindBy(id="password")
-    public WebElement passwordInput;
 
-    @FindBy(xpath="//*[@type='submit']")
-    public WebElement loginButton;
 }
