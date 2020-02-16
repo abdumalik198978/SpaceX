@@ -103,9 +103,9 @@ public class SmokeTest {
         Assert.assertTrue(expectedPurchaseOrderConfirmText.equals(actual), "Confirmation number does't match");
 
     }
-@AfterClass
+    @AfterClass
     public void closePage(){
         Driver.closeDriver();
-}
+    }
 }
 
