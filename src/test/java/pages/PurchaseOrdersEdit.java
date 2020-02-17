@@ -5,8 +5,8 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import utilities.Driver;
 
-public class PurchaseOrders {
-    public PurchaseOrders(){
+public class PurchaseOrdersEdit {
+    public PurchaseOrdersEdit(){
         PageFactory.initElements(Driver.getDriver(),this);
     }
 
@@ -22,11 +22,25 @@ public class PurchaseOrders {
     @FindBy(xpath = "//button[@class='btn btn-primary btn-sm o_form_button_edit']")
     public WebElement editButton;
 
-    @FindBy(xpath = "//input[@ id='o_field_input_994']")
+    @FindBy(name="partner_ref")
     public WebElement addVenderReference;
 
-    @FindBy()
+    @FindBy(xpath = "//button[@class='btn btn-primary btn-sm o_form_button_save']")
    public WebElement saveButton;
+
+    @FindBy(xpath = "//span[@name='name']")
+    public  WebElement nameOfOrder;
+
+    @FindBy(xpath = "//button[@class='o_dropdown_toggler_btn btn btn-sm dropdown-toggle']")
+    public  WebElement printButton;
+
+    @FindBy(xpath = "(//a[@data-index='0'])[1]")
+    public WebElement purchaseOrderOptionFromPrintButton;
+
+
+
+
+
 
 
 

@@ -1,5 +1,6 @@
 package smokeTest;
 
+import com.github.javafaker.Faker;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
@@ -9,6 +10,7 @@ import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
+import pages.PurchaseOrdersEdit;
 import pages.brideERP_pages.*;
 import utilities.Config;
 import utilities.Driver;
@@ -103,6 +105,56 @@ public class SmokeTest {
         Assert.assertTrue(expectedPurchaseOrderConfirmText.equals(actual), "Confirmation number does't match");
 
     }
+
+
+    @Test(priority = 16)
+    public void VerifyEditButtonFromPurchaseOrder(){
+        PurchaseOrdersEdit purchaseOrdersEdit=new PurchaseOrdersEdit();
+        purchaseOrdersEdit.purchaseButton.click();
+
+        purchaseOrdersEdit.purchaseOrders.click();
+        SeleniumUtil.pause(3);
+        String actualTitle = Driver.getDriver().getTitle();
+        String expectedTitle="Purchase Orders - Odoo";
+        Assert.assertTrue(actualTitle.contains(expectedTitle),"Purchase orders title verification is failed");
+
+        purchaseOrdersEdit.orderFromPurchaseList.click();
+        SeleniumUtil.pause(2);
+        String expectedTitleName=purchaseOrdersEdit.nameOfOrder.getText();
+        String actualTitleName = Driver.getDriver().getTitle();
+
+        Assert.assertTrue(actualTitleName.contains(expectedTitleName),"Title doesn't contain the order name");
+
+        purchaseOrdersEdit.editButton.click();
+        SeleniumUtil.pause(3);
+        purchaseOrdersEdit.addVenderReference.click();
+        purchaseOrdersEdit.addVenderReference.sendKeys("Orders");
+        SeleniumUtil.pause(3);
+        purchaseOrdersEdit.saveButton.click();
+
+    }
+    @Test(priority = 17)
+    public  void VerifyPrintButtonFromPurchaseOrder(){
+        PurchaseOrdersEdit purchaseOrdersEdit=new PurchaseOrdersEdit();
+        purchaseOrdersEdit.purchaseButton.click();
+
+        purchaseOrdersEdit.purchaseOrders.click();
+        SeleniumUtil.pause(3);
+
+        purchaseOrdersEdit.orderFromPurchaseList.click();
+        SeleniumUtil.pause(2);
+
+       purchaseOrdersEdit.printButton.click();
+
+       SeleniumUtil.pause(2);
+
+       purchaseOrdersEdit.purchaseOrderOptionFromPrintButton.click();
+        SeleniumUtil.pause(5);
+
+    }
+
+
+
     @AfterClass
     public void closePage(){
         Driver.closeDriver();
