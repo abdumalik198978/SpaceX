@@ -9,6 +9,12 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
+
+import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
@@ -22,6 +28,12 @@ import utilities.SeleniumUtil;
 import org.testng.annotations.AfterClass;
 import pages.brideERP_pages.*;
 
+
+import java.awt.*;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+
 import java.util.List;
 import java.util.Random;
 
@@ -29,13 +41,22 @@ import java.security.Key;
 import java.util.List;
 
 public class SmokeTest {
+
+
+
+    MondayProjectPages mondayProjectPages = new MondayProjectPages();
+    WebDriverWait wait = new WebDriverWait(Driver.getDriver(),10);
+
     VendorsPageSaime vp=new VendorsPageSaime();
+
     ProductsPage productsPage = new ProductsPage();
+
 
     @BeforeClass
     public void setUp() {
         ERP_login login = new ERP_login();
-        Driver.getDriver().get(Config.getProperties("UrlBriteERP"));
+        //Driver.getDriver().get(Config.getProperties("UrlBriteERP"));
+        Driver.getDriver().get((String) Config.getProperties("UrlBriteERP"));
         login.usernameInput.sendKeys(Config.getProperties("briteUserName"));
         login.passwordInput.sendKeys(Config.getProperties("britePassword"));
         login.loginButton.click();
@@ -59,10 +80,85 @@ public class SmokeTest {
         vp.vendorsButton.click();
         SeleniumUtil.pause(6);
 
-//        Verify it navigates user to Vendors page.
         Assert.assertEquals(vp.vendorPageTitle.getText(), "Vendors");
         wait.until(ExpectedConditions.visibilityOf(vp.purchasesButton)).click();
     }
+
+    @Test(priority = 1)
+    public void Create_request_for_quotation(){
+        String expectedTitle = "Requests for Quotation - Odoo";
+        Assert.assertEquals(Driver.getDriver().getTitle(),expectedTitle);
+        Assert.assertTrue(mondayProjectPages.createButton.isDisplayed(),"Create button is not displayed");
+        mondayProjectPages.createButton.click();
+
+
+        String expcetedCreatePageTitle = "New - Odoo";
+        Assert.assertEquals(Driver.getDriver().getTitle(),expectedTitle);
+        Assert.assertTrue(mondayProjectPages.vendorField.isDisplayed());
+
+
+        Assert.assertTrue(mondayProjectPages.vendorField.getAttribute("value").isEmpty(),"Vendor is not empty");
+        mondayProjectPages.vendorField.click();
+        mondayProjectPages.elementVendor.click();
+
+
+        String expectDate = LocalDate.now().format(DateTimeFormatter.ofPattern("MM/dd/yyyy"));
+        LocalTime expectTime = LocalTime.now().minusSeconds(1);
+        String changeTime = expectTime.format(DateTimeFormatter.ISO_TIME).substring(0,8);
+        String expectedDateTime = expectDate + " " + changeTime;
+        System.out.println(expectedDateTime);
+        //       Assert.assertEquals(mondayProjectPages.calendarValue.getAttribute("value"),expectedDateTime);
+        System.out.println(mondayProjectPages.calendarValue.getText());
+        Assert.assertFalse(mondayProjectPages.calendarValue.getText().isEmpty(),"Time is empty");
+        mondayProjectPages.deliveriesAndInvoices.click();
+
+
+        Assert.assertTrue(mondayProjectPages.scheduleDate.getAttribute("value").isEmpty(),"Schedule date is not empty");
+        mondayProjectPages.scheduleDate.sendKeys(expectedDateTime);
+        System.out.println(expectedDateTime);
+
+        mondayProjectPages.saveButton.click();
+        mondayProjectPages.confirmOrderButton.click();
+        //  Assert.assertTrue(mondayProjectPages.errorMessageForSchedule.isDisplayed(),"Schedule error message displayed.You didn't save order");
+
+    }
+
+    @Test (priority = 2)
+    public void User_not_able_to_save_request_for_quotation_with_empty_fields(){
+        mondayProjectPages.requestForQuotationLink.click();
+        wait.until(ExpectedConditions.elementToBeClickable(mondayProjectPages.createButton));
+        // Assert.assertTrue(mondayProjectPages.createButton.isDisplayed(),"Create button for with empty fields is not there");
+        mondayProjectPages.createButton.click();
+
+
+        String expcetedCreatePageTitle = "New - Odoo";
+        wait.until(ExpectedConditions.titleIs(expcetedCreatePageTitle));
+        Assert.assertEquals(Driver.getDriver().getTitle(),expcetedCreatePageTitle);
+
+
+        mondayProjectPages.saveButton.click();
+        Assert.assertTrue(mondayProjectPages.errorMessage.isDisplayed(),"Error message didn't displayed");
+    }
+
+
+    @Test (priority = 3)
+    public void Use_search_button(){
+        mondayProjectPages.requestForQuotationLink.click();
+        wait.until(ExpectedConditions.visibilityOf(mondayProjectPages.searchField));
+        Assert.assertTrue(mondayProjectPages.searchField.isDisplayed());
+        mondayProjectPages.searchField.click();
+        mondayProjectPages.searchField.sendKeys("ACD");
+        Assert.assertTrue(mondayProjectPages.optionsForSearch.isDisplayed());
+        mondayProjectPages.findByVendor.click();
+        Assert.assertTrue(mondayProjectPages.relatedResultForVendor.isDisplayed(),"Related result is not there");
+
+    }
+
+
+
+//        Verify it navigates user to Vendors page.
+
+
     @Test(priority = 11)
     public void purchaseOrdersButtonVerification() {
         PurchaseOrdersPage pf = new PurchaseOrdersPage();
