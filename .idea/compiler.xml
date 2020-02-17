@@ -8,7 +8,11 @@
         <outputRelativeToContentRoot value="true" />
         <module name="MondayProject" />
         <module name="Automation" />
+<<<<<<< HEAD
+        <module name="SpaceX1" />
+=======
         <module name="SpaceX" />
+>>>>>>> 4133cfc0b7a360f24fabc60a3695c1fa4ac69531
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel target="12" />

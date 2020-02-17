@@ -24,6 +24,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
+import pages.PurchaseOrdersEdit;
 import pages.brideERP_pages.ERP_login;
 import pages.brideERP_pages.Icoming_Products_Create_Import_page;
 import pages.brideERP_pages.VendorsPageSaime;
@@ -502,5 +503,40 @@ public class SmokeTest {
         incomingProductsPage.incomingProductsProductDetail.click();
         Assert.assertTrue(incomingProductsPage.incomingProductsProductDetail.getText().contains(incomingProductsPage.incomingProductsProductDetailTitle.getText()), "Titles do not match");
     }
+    @Test(priority = 16)
+    public void VerifyEditButtonFromPurchaseOrder(){
+        PurchaseOrdersEdit purchaseOrdersEdit=new PurchaseOrdersEdit();
+        purchaseOrdersEdit.purchaseButton.click();
+        purchaseOrdersEdit.purchaseOrders.click();
+        SeleniumUtil.pause(3);
+        String actualTitle = Driver.getDriver().getTitle();
+        String expectedTitle="Purchase Orders - Odoo";
+        Assert.assertTrue(actualTitle.contains(expectedTitle),"Purchase orders title verification is failed");
+        purchaseOrdersEdit.orderFromPurchaseList.click();
+        SeleniumUtil.pause(2);
+        String expectedTitleName=purchaseOrdersEdit.nameOfOrder.getText();
+        String actualTitleName = Driver.getDriver().getTitle();
+        Assert.assertTrue(actualTitleName.contains(expectedTitleName),"Title doesn't contain the order name");
+        purchaseOrdersEdit.editButton.click();
+        SeleniumUtil.pause(3);
+        purchaseOrdersEdit.addVenderReference.click();
+        purchaseOrdersEdit.addVenderReference.sendKeys("Orders");
+        SeleniumUtil.pause(3);
+        purchaseOrdersEdit.saveButton.click();
+    }
+    @Test(priority = 17)
+    public  void VerifyPrintButtonFromPurchaseOrder(){
+        PurchaseOrdersEdit purchaseOrdersEdit=new PurchaseOrdersEdit();
+        purchaseOrdersEdit.purchaseButton.click();
+        purchaseOrdersEdit.purchaseOrders.click();
+        SeleniumUtil.pause(3);
+        purchaseOrdersEdit.orderFromPurchaseList.click();
+        SeleniumUtil.pause(2);
+        purchaseOrdersEdit.printButton.click();
+        SeleniumUtil.pause(2);
+        purchaseOrdersEdit.purchaseOrderOptionFromPrintButton.click();
+        SeleniumUtil.pause(5);
+    }
+
 }
 
