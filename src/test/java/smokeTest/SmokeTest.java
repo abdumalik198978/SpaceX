@@ -104,7 +104,8 @@ public class SmokeTest {
         mondayProjectPages.createButton.click();
 
 
-
+        String expcetedCreatePageTitle = "New - Odoo";
+        Assert.assertEquals(Driver.getDriver().getTitle(),expectedTitle);
         Assert.assertTrue(mondayProjectPages.vendorField.isDisplayed());
 
 
@@ -117,10 +118,10 @@ public class SmokeTest {
         LocalTime expectTime = LocalTime.now().minusSeconds(1);
         String changeTime = expectTime.format(DateTimeFormatter.ISO_TIME).substring(0,8);
         String expectedDateTime = expectDate + " " + changeTime;
-        //      System.out.println(expectedDateTime);
+        System.out.println(expectedDateTime);
         //       Assert.assertEquals(mondayProjectPages.calendarValue.getAttribute("value"),expectedDateTime);
-
-        Assert.assertFalse(mondayProjectPages.calendarValue.getAttribute("value").isEmpty(),"Time is empty");
+        System.out.println(mondayProjectPages.calendarValue.getText());
+        Assert.assertFalse(mondayProjectPages.calendarValue.getText().isEmpty(),"Time is empty");
         mondayProjectPages.deliveriesAndInvoices.click();
 
 
@@ -130,30 +131,30 @@ public class SmokeTest {
 
         mondayProjectPages.saveButton.click();
         mondayProjectPages.confirmOrderButton.click();
-        Assert.assertFalse(mondayProjectPages.errorMessageForSchedule.isDisplayed(),"Schedule error message displayed.You didn't save order");
-
+        //  Assert.assertTrue(mondayProjectPages.errorMessageForSchedule.isDisplayed(),"Schedule error message displayed.You didn't save order");
 
     }
 
     @Test (priority = 2)
     public void User_not_able_to_save_request_for_quotation_with_empty_fields(){
-        SeleniumUtil.pause(3);
-        mondayProjectPages.requestForQuotation.click();
-        SeleniumUtil.pause(3);
+        mondayProjectPages.requestForQuotationLink.click();
         wait.until(ExpectedConditions.elementToBeClickable(mondayProjectPages.createButton));
         // Assert.assertTrue(mondayProjectPages.createButton.isDisplayed(),"Create button for with empty fields is not there");
         mondayProjectPages.createButton.click();
 
+
+        String expcetedCreatePageTitle = "New - Odoo";
+        wait.until(ExpectedConditions.titleIs(expcetedCreatePageTitle));
+        Assert.assertEquals(Driver.getDriver().getTitle(),expcetedCreatePageTitle);
 
 
         mondayProjectPages.saveButton.click();
         Assert.assertTrue(mondayProjectPages.errorMessage.isDisplayed(),"Error message didn't displayed");
     }
 
+
     @Test (priority = 3)
     public void Use_search_button(){
-        SeleniumUtil.pause(3);
-        //     mondayProjectPages.purchaseTab.click();
         mondayProjectPages.requestForQuotationLink.click();
         wait.until(ExpectedConditions.visibilityOf(mondayProjectPages.searchField));
         Assert.assertTrue(mondayProjectPages.searchField.isDisplayed());
@@ -199,7 +200,7 @@ public class SmokeTest {
         Thread.sleep(1000);
         pagesIncoming.searchMore_ReferenceSourceLocationInput.click();
         //Here to make it dynamic I am using random generator to select random fromlist
-
+//====================================
         // I select search more button from dropdown and it displays a table of location lists
         List<WebElement> elementsOfReference = Driver.getDriver().findElements(By.xpath("(//div[@class='table-responsive'])[3]//tbody/tr"));
        // System.out.println(elementsOfReference);
@@ -210,7 +211,7 @@ public class SmokeTest {
         WebDriverWait wait = new WebDriverWait(Driver.getDriver(),3);
         wait.until(ExpectedConditions.visibilityOf(Driver.getDriver().findElement(By.xpath("(//div[@class='table-responsive'])[3]//tbody/tr["+ index1+ "]"))));
        Driver.getDriver().findElement(By.xpath("(//div[@class='table-responsive'])[3]//tbody/tr["+ index1+ "]")).click();
-
+//=====================================
         pagesIncoming.destinationLocationInput.click();
         pagesIncoming.seacrMore_DestinationLocation.click();
         List<WebElement> elementsOfDestination = Driver.getDriver().findElements(By.xpath("(//div[@class='table-responsive'])[3]//tbody/tr"));
@@ -219,7 +220,7 @@ public class SmokeTest {
         int index2 = randomNum.nextInt(boundry2);
        // System.out.println(index2);
         Driver.getDriver().findElement(By.xpath("(//div[@class='table-responsive'])[3]//tbody/tr["+index2+"]")).click();
-
+//======================================
         pagesIncoming.productInput.click();
         pagesIncoming.searchMore_Product.click();
         List<WebElement> elementsOfProduct = Driver.getDriver().findElements(By.xpath("(//div[@class ='table-responsive'])[3]//tbody/tr"));
@@ -228,12 +229,12 @@ public class SmokeTest {
         int index3 = randomNum.nextInt(boundry3);
         // System.out.println(index3);
         Driver.getDriver().findElement(By.xpath("(//div[@class ='table-responsive'])[3]//tbody/tr["+ index3+"]")).click();
-
+//========================================
         pagesIncoming.initialDemandInput.clear();
         pagesIncoming.initialDemandInput.sendKeys("100");
 
         pagesIncoming.sourceDocumentInput.sendKeys("From Abdumalik");
-
+//==========================================
         pagesIncoming.procurementDocInput.click();
         pagesIncoming.searchMore_Procurement.click();
         List<WebElement> elementsOfProcurement = Driver.getDriver().findElements(By.xpath("(//div[@class ='table-responsive'])[3]//tbody/tr"));
@@ -242,7 +243,7 @@ public class SmokeTest {
         int index4 = randomNum.nextInt(boundry4);
         //System.out.println(index4);
         Driver.getDriver().findElement(By.xpath("(//div[@class='table-responsive']//tbody)[3]/tr["+index4+"]")).click();
-
+//===============================================
         pagesIncoming.saveButtonForCreateIncomingProducts.click();
 
          wait = new WebDriverWait(Driver.getDriver(),3);
