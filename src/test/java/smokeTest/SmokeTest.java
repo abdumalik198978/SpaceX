@@ -97,6 +97,8 @@ public class SmokeTest {
 
     @Test(priority = 1)
     public void Create_request_for_quotation(){
+        mondayProjectPages.purchaseTab.click();
+        SeleniumUtil.pause(3);
         String expectedTitle = "Requests for Quotation - Odoo";
         Assert.assertEquals(Driver.getDriver().getTitle(),expectedTitle);
         Assert.assertTrue(mondayProjectPages.createButton.isDisplayed(),"Create button is not displayed");
