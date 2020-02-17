@@ -1,5 +1,6 @@
 package utilities;
 
+
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Properties;
@@ -20,7 +21,7 @@ public class Config {
         }
     }
 
-    public  static  String getProperties(String keyword){
+    public  static java.lang.CharSequence getProperties(String keyword){
         return properties.getProperty(keyword);
     }
 }

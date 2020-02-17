@@ -24,7 +24,7 @@ public class SmokeTest {
     @BeforeClass
     public void setUp() {
         ERP_login login = new ERP_login();
-        Driver.getDriver().get(Config.getProperties("UrlBriteERP"));
+        Driver.getDriver().get("http://app.briteerp.com/web/login#view_type=kanban&model=crm.lead&action=366");
         login.usernameInput.sendKeys(Config.getProperties("briteUserName"));
         login.passwordInput.sendKeys(Config.getProperties("britePassword"));
         login.loginButton.click();
@@ -154,13 +154,10 @@ public class SmokeTest {
     }
 
 
-<<<<<<< Updated upstream
 
     @AfterClass
     public void closePage(){
         Driver.closeDriver();
     }
-=======
->>>>>>> Stashed changes
 }
 
