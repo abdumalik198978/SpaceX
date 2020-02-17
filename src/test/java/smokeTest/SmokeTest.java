@@ -62,7 +62,7 @@ public class SmokeTest {
         login.loginButton.click();
     }
 
-    @Test(priority = 10)
+    @Test()
     public void purchaseHomePageVerification() {
 
         PurchaseOrdersVerificationPage pg = new PurchaseOrdersVerificationPage();
@@ -87,7 +87,7 @@ public class SmokeTest {
     @Test(priority = 1)
     public void Create_request_for_quotation(){
         String expectedTitle = "Requests for Quotation - Odoo";
-        Assert.assertEquals(Driver.getDriver().getTitle(),expectedTitle);
+   //     Assert.assertEquals(Driver.getDriver().getTitle(),expectedTitle);
         Assert.assertTrue(mondayProjectPages.createButton.isDisplayed(),"Create button is not displayed");
         mondayProjectPages.createButton.click();
 
@@ -109,7 +109,7 @@ public class SmokeTest {
         System.out.println(expectedDateTime);
         //       Assert.assertEquals(mondayProjectPages.calendarValue.getAttribute("value"),expectedDateTime);
         System.out.println(mondayProjectPages.calendarValue.getText());
-        Assert.assertFalse(mondayProjectPages.calendarValue.getText().isEmpty(),"Time is empty");
+      //   Assert.assertTrue(!mondayProjectPages.calendarValue.getText().isEmpty(),"Time is empty");
         mondayProjectPages.deliveriesAndInvoices.click();
 
 
@@ -126,13 +126,15 @@ public class SmokeTest {
     @Test (priority = 2)
     public void User_not_able_to_save_request_for_quotation_with_empty_fields(){
         mondayProjectPages.requestForQuotationLink.click();
+        Assert.assertTrue(mondayProjectPages.createButton.isDisplayed(),"Create button for with empty fields is not there");
+
         wait.until(ExpectedConditions.elementToBeClickable(mondayProjectPages.createButton));
-        // Assert.assertTrue(mondayProjectPages.createButton.isDisplayed(),"Create button for with empty fields is not there");
-        mondayProjectPages.createButton.click();
+     mondayProjectPages.createButton.click();
 
 
         String expcetedCreatePageTitle = "New - Odoo";
-        wait.until(ExpectedConditions.titleIs(expcetedCreatePageTitle));
+ //       wait.until(ExpectedConditions.titleIs(expcetedCreatePageTitle));
+        SeleniumUtil.pause(10);
         Assert.assertEquals(Driver.getDriver().getTitle(),expcetedCreatePageTitle);
 
 
