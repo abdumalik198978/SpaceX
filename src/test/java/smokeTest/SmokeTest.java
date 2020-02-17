@@ -154,10 +154,13 @@ public class SmokeTest {
     }
 
 
+<<<<<<< Updated upstream
 
     @AfterClass
     public void closePage(){
         Driver.closeDriver();
     }
+=======
+>>>>>>> Stashed changes
 }
 
