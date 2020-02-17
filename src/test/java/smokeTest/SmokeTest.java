@@ -473,7 +473,41 @@ public class SmokeTest {
 
     }
 
+    @Test
+    public void IncomingProductPageVerification() throws InterruptedException{
+        IncomingProductsPage incomingProductsPage = new IncomingProductsPage();
+        incomingProductsPage.purchases.click();
+        incomingProductsPage.incomingProductsField.click();
+        String incomingProductsTitle = "Incoming Products";
+        Thread.sleep(4000);
+        Assert.assertTrue(Driver.getDriver().getTitle().contains("Incoming Products"));
+    }
+
+    @Test
+    public void search_for_IncomingProducts_Positive_Search()throws InterruptedException{
+        IncomingProductsPage incomingProductsPage = new IncomingProductsPage();
+        String word = "ice cream";
+        incomingProductsPage.searchBox.sendKeys(word + Keys.ENTER);
+        Thread.sleep(1000);
+        List<WebElement> searchList = incomingProductsPage.listOfSearchedItems;
+
+        for (WebElement e: searchList) {
 
 
+            Assert.assertTrue(e.getText().toLowerCase().contains(word), "Search result is not the same.");
+        }
+    }
+
+    @Test
+    public void verify_user_is_able_to_see_details_about_the_Incoming_product_document(){
+        IncomingProductsPage incomingProductsPage = new IncomingProductsPage();
+        incomingProductsPage.purchases.click();
+        incomingProductsPage.incomingProductsField.click();
+        incomingProductsPage.incomingProductsProduct.click();
+        incomingProductsPage.incomingProductsProductDetail.click();
+        Assert.assertTrue(incomingProductsPage.incomingProductsProductDetail.getText().contains(incomingProductsPage.incomingProductsProductDetailTitle.getText()), "Titles do not match");
+
+
+    }
 }
 
