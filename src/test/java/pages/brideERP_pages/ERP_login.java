@@ -18,4 +18,5 @@ public class ERP_login {
 
     @FindBy(xpath="//*[@type='submit']")
     public WebElement loginButton;
+
 }
